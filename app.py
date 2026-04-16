@@ -42,16 +42,16 @@ def recommend(movie):
 st.header('Movie Recommender System')
 
 movies = pickle.load(open('model/movie_list.pkl', 'rb'))
-import requests
+
+import gdown
 import pickle
 import os
 
+file_id = "1Ex3UHlHX7podCZoeGs1LnMJS1eh6W6YN"
+url = f"https://drive.google.com/uc?id={file_id}"
+
 if not os.path.exists('similarity.pkl'):
-    url = "https://drive.google.com/uc?id=1Ex3UHlHX7podCZoeGs1LnMJS1eh6W6YN"
-    r = requests.get(url)
-    
-    with open("similarity.pkl", "wb") as f:
-        f.write(r.content)
+    gdown.download(url, 'similarity.pkl', quiet=False)
 
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 
